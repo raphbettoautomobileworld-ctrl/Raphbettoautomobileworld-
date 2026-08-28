@@ -1,0 +1,79 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Naija Proconnect - Engr Raphael Raphbetto Auto World</title>
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <header>
+        <h1>Naija Proconnect</h1>
+        <p>Find Verified Mechanics & Artisans in Nigeria</p>
+        <a href="http://www.raphbettoautomobileworld.com/" target="_blank" class="btn">Visit Raphbetto Site</a>
+      </header>
+
+      <section class="search-section">
+        <h2>Find a Pro Near You</h2>
+        <input type="text" id="searchInput" placeholder="Search: mechanic, plumber...">
+        <input type="text" id="locationInput" placeholder="Enter City: Port Harcourt, Calabar...">
+        <button onclick="searchPro()" class="btn">Search</button>
+      </section>
+
+      <section class="gallery">
+        <h2>Raphbetto Automobile World - Calabar</h2>
+        <div class="gallery-grid">
+          <img src="flyer1.jpg" alt="Raphbetto Auto Electrical Expert">
+          <img src="flyer2.jpg" alt="Car Fuses Guide">
+          <img src="flyer3.jpg" alt="Suspension System">
+          <img src="logo.jpg" alt="Raphbetto Logo">
+          <img src="ceo.jpg" alt="Engr Raphael CEO">
+          <img src="naija1.jpg" alt="Naija Proconnect">
+        </div>
+        <video controls width="320">
+          <source src="work-video.mp4" type="video/mp4">
+        </video>
+      </section>
+
+      <section id="results" class="results"></section>
+
+      <footer>
+        <div class="socials">
+          <a href="https://wa.me/2348033532908" target="_blank" class="social-btn whatsapp">📱 WhatsApp</a>
+          <a href="http://www.raphbettoautomobileworld.com/" target="_blank" class="social-btn facebook">🌐 Website</a>
+          <a href="https://tiktok.com/@raphbettoeffiong" target="_blank" class="social-btn tiktok">🎵 TikTok</a>
+        </div>
+        <p>© 2026 Naija Proconnect. Made in Nigeria</p>
+      </footer>
+
+      <script>
+        const pros = [
+          {name: "Engr Raphael Asuquo Effiong - Raphbetto Auto World", skill: "Mechanic, Electrician", location: "Calabar", address: "68 IBB Way, Calabar", phone: "08076004045", rating: "5.0", featured: "⭐ TOP RATED"},
+          {name: "Chinedu Auto Works", skill: "Mechanic", location: "Port Harcourt", address: "12 Aba Road", phone: "080XXXXXXXX", rating: "4.8"}
+        ];
+        function searchPro() {
+          const skill = document.getElementById('searchInput').value.toLowerCase();
+          const loc = document.getElementById('locationInput').value.toLowerCase();
+          const resultsDiv = document.getElementById('results');
+          const filtered = pros.filter(pro => 
+            pro.skill.toLowerCase().includes(skill) && 
+            pro.location.toLowerCase().includes(loc)
+          );
+          if(filtered.length === 0) {
+            resultsDiv.innerHTML = "<h3>No pros found. Try 'mechanic' and 'Calabar'</h3>";
+            return;
+          }
+          resultsDiv.innerHTML = "<h2>Search Results</h2>" + filtered.map(pro => `
+            <div class="pro-card">
+              <h3>${pro.name} ${pro.featured ? pro.featured : ''}</h3>
+              <p><b>Skill:</b> ${pro.skill} | <b>Location:</b> ${pro.location}</p>
+              <p><b>Address:</b> ${pro.address}</p>
+              <p><b>Phone:</b> <a href="tel:${pro.phone}">${pro.phone}</a></p>
+              <p>⭐ Rating: ${pro.rating}/5.0</p>
+              <a href="tel:${pro.phone}" class="btn">Call Now</a>
+            </div>
+          `).join('');
+        }
+      </script>
+    </body>
+    </html>
